@@ -1,5 +1,4 @@
 import json
-import shutil
 from pathlib import Path
 
 def merge_manifest(base_manifest: dict, patch: dict) -> dict:
@@ -15,36 +14,17 @@ def merge_manifest(base_manifest: dict, patch: dict) -> dict:
 
 def main():
     project_root = Path(__file__).parent.parent
-    repo_root = project_root.parent.parent
-    
-    src_act3 = repo_root / "data" / "act_3"
-    dst_act3 = project_root / "data" / "act_3"
-    
-    # 1. Copia i file fisicamente
-    if src_act3.exists():
-        dst_act3.mkdir(parents=True, exist_ok=True)
-        copied = 0
-        for item in src_act3.glob("*"):
-            if item.is_file():
-                shutil.copy2(item, dst_act3 / item.name)
-                copied += 1
-        print(f"[OK] Copiati {copied} file in {dst_act3.relative_to(project_root)}")
-    else:
-        print("[ERRORE] Cartella sorgente act_3 non trovata!")
-        return
-        
-    # 2. Unisci il manifest
     base_manifest_path = project_root / "data" / "manifest.json"
-    patch_manifest_path = repo_root / "data" / "release_manifest.json"
+    patch_manifest_path = project_root / "data" / "release_manifest.json"
     
     if base_manifest_path.exists() and patch_manifest_path.exists():
         base = json.loads(base_manifest_path.read_text(encoding="utf-8"))
         patch = json.loads(patch_manifest_path.read_text(encoding="utf-8"))
         merged = merge_manifest(base, patch)
         base_manifest_path.write_text(json.dumps(merged, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        print(f"[OK] Manifest aggiornato. Act disponibili: {merged['available_acts']}")
+        print(f"[OK] Manifest unificato con successo per Act 4. Atti disponibili: {merged['available_acts']}")
     else:
-        print("[ERRORE] Impossibile trovare i file manifest per l'unione!")
+        print("[ERRORE] File manifest non trovati.")
 
 if __name__ == "__main__":
     main()
