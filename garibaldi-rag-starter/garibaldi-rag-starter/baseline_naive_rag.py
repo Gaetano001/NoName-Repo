@@ -408,7 +408,7 @@ def run_validate_only(args: argparse.Namespace) -> int:
 
 def main() -> int:
     load_dotenv()
-    parser = argparse.ArgumentParser(description="Baseline naive RAG (Lab_08) → submission.json")
+    parser = argparse.ArgumentParser(description="Baseline naive RAG (Lab_08) -> submission.json")
     parser.add_argument("--questions", type=Path, help="JSON domande del round")
     parser.add_argument("--round-id", help="round_id da scrivere nella submission")
     parser.add_argument("--output", type=Path, help="Percorso submission.json in output")
