@@ -1,0 +1,275 @@
+{
+  "round_id": "round_1",
+  "question_count": 8,
+  "questions": [
+    {
+      "question_id": "R1_Q001",
+      "question": "Secondo la cronologia ufficiale, in quale data e in quale luogo avviene lo sbarco?",
+      "type": "factual",
+      "difficulty": "easy",
+      "expected_answer": "La cronologia colloca lo sbarco a Marsala l’11 maggio 1860.",
+      "relevant_sources": [
+        "cronologia_ufficiale_01"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "11 maggio 1860",
+          "11 maggio"
+        ],
+        [
+          "Marsala"
+        ]
+      ],
+      "uncertainty_required": false,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R1_Q002",
+      "question": "Quali quattro categorie usa il dossier per classificare il peso delle evidenze?",
+      "type": "factual",
+      "difficulty": "easy",
+      "expected_answer": "Il dossier distingue prova diretta, indizio, congettura e fonte contestata.",
+      "relevant_sources": [
+        "dossier_introduttivo_01"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "prova diretta"
+        ],
+        [
+          "indizio"
+        ],
+        [
+          "congettura"
+        ],
+        [
+          "fonte contestata"
+        ]
+      ],
+      "uncertainty_required": false,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R1_Q003",
+      "question": "Quali preparativi concreti chiede il principe Salina e con quali cautele?",
+      "type": "factual",
+      "difficulty": "easy",
+      "expected_answer": "Chiede dodici carri e due granai, mascherati da preparativi per la raccolta; ordina di non promettere nulla e di non lasciare tracce scritte.",
+      "relevant_sources": [
+        "lettera_salina_01"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "dodici carri",
+          "12 carri"
+        ],
+        [
+          "due granai",
+          "2 granai"
+        ],
+        [
+          "non si prometta",
+          "nessuna promessa"
+        ],
+        [
+          "non per iscritto",
+          "nessuna traccia scritta"
+        ]
+      ],
+      "uncertainty_required": false,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R1_Q004",
+      "question": "Che cosa afferma e che cosa nega il dispaccio del console britannico riguardo alla presenza inglese?",
+      "type": "factual",
+      "difficulty": "medium",
+      "expected_answer": "Registra navi mercantili britanniche, traffico e domande sui bastimenti; nega un ordine di protezione e precisa che una garanzia potrebbe essere soltanto un’interpretazione locale.",
+      "relevant_sources": [
+        "dispaccio_console_inglese_01"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "navi britanniche commerciali",
+          "navi mercantili"
+        ],
+        [
+          "nessun ordine di protezione",
+          "non risulta impartito"
+        ],
+        [
+          "garanzia non concessa",
+          "interpretata come garanzia"
+        ]
+      ],
+      "uncertainty_required": false,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R1_Q005",
+      "question": "In che modo i due giornali descrivono diversamente il consenso popolare?",
+      "type": "contradiction",
+      "difficulty": "medium",
+      "expected_answer": "Il foglio liberale presenta un consenso unanime e spontaneo; quello borbonico descrive timore e ostilità. Entrambi sono di parte e non consentono da soli di stabilire il consenso reale.",
+      "relevant_sources": [
+        "giornale_liberale_01",
+        "giornale_borbonico_01"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "unanime",
+          "consenso"
+        ],
+        [
+          "timore",
+          "ostilita",
+          "ostilità"
+        ],
+        [
+          "di parte",
+          "propaganda",
+          "non consentono"
+        ]
+      ],
+      "uncertainty_required": true,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R1_Q006",
+      "question": "Quali anomalie osserva il funzionario borbonico e quale accusa evita di formulare?",
+      "type": "factual",
+      "difficulty": "medium",
+      "expected_answer": "Osserva ordini contrastanti, pattuglie spostate, cancelli aperti e carri pronti; dichiara di non avere elementi per accusare i notabili di collusione.",
+      "relevant_sources": [
+        "nota_funzionario_borbonico_01"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "ordini contrastanti"
+        ],
+        [
+          "pattuglie spostate"
+        ],
+        [
+          "cancelli aperti"
+        ],
+        [
+          "carri pronti"
+        ],
+        [
+          "non dispone di elementi",
+          "non accusa",
+          "collusione"
+        ]
+      ],
+      "uncertainty_required": false,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R1_Q007",
+      "question": "Le fonti di Act 1-2 provano un accordo formale dei notabili prima dello sbarco?",
+      "type": "insufficient_evidence",
+      "difficulty": "medium",
+      "expected_answer": "No. Mostrano voci, preparativi logistici e conoscenza possibile, ma negano promesse o ordini e non contengono firme o un patto verificabile.",
+      "relevant_sources": [
+        "lettera_salina_01",
+        "dispaccio_console_inglese_01",
+        "nota_funzionario_borbonico_01"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [
+        "giornale_liberale_01"
+      ],
+      "forbidden_claims": [
+        "Esiste un patto firmato dei notabili.",
+        "La Gran Bretagna garantì ufficialmente lo sbarco."
+      ],
+      "requires_abstention": true,
+      "required_facts": [
+        [
+          "non prova",
+          "non ci sono prove",
+          "evidenza insufficiente"
+        ],
+        [
+          "preparativi logistici",
+          "carri"
+        ],
+        [
+          "nessuna promessa",
+          "nessun ordine",
+          "nessuna firma"
+        ]
+      ],
+      "uncertainty_required": true,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R1_Q008",
+      "question": "Quali indizi, letti insieme, suggeriscono una preparazione precedente all’arrivo pubblico dei volontari?",
+      "type": "cross_document",
+      "difficulty": "hard",
+      "expected_answer": "La lettera Salina dispone carri e granai prima dello sbarco; il dispaccio registra richieste sugli orari e un corriere; la nota borbonica trova carri già pronti. Sono indizi convergenti di preparazione, non prova di accordo politico.",
+      "relevant_sources": [
+        "lettera_salina_01",
+        "dispaccio_console_inglese_01",
+        "nota_funzionario_borbonico_01"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "carri",
+          "granai"
+        ],
+        [
+          "corriere",
+          "orari dei bastimenti"
+        ],
+        [
+          "carri pronti prima"
+        ],
+        [
+          "indizi",
+          "non prova"
+        ]
+      ],
+      "uncertainty_required": true,
+      "judge_notes": ""
+    }
+  ]
+}
