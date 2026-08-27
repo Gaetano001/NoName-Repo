@@ -305,6 +305,7 @@ GROUNDING = (
 
 _STOPWORDS = {
     "della", "dello", "delle", "degli", "sulla", "sullo", "nella", "nello",
+    "senza", "sopra", "sotto", "prima", "dopo", "contro", "verso", "sugli",
     "documento", "originale", "pagine", "pagina", "semplice", "chiave",
     "estratto", "archivio", "ufficiale", "eventi", "luoghi",
 }
@@ -314,7 +315,9 @@ def _norm_match(text: str) -> str:
     import unicodedata
 
     text = unicodedata.normalize("NFKD", text.lower())
-    return "".join(c for c in text if not unicodedata.combining(c))
+    text = "".join(c for c in text if not unicodedata.combining(c))
+    # "l'agenda" deve matchare "agenda": l'apostrofo diventa spazio
+    return text.replace("'", " ").replace("’", " ")
 
 
 def _source_tokens(source: str) -> set[str]:
@@ -336,15 +339,82 @@ def matched_docs_for(question: str, manifest: dict) -> set[str]:
     solo i documenti con il punteggio di match massimo.
     """
     question_norm = " " + _norm_match(question) + " "
-    scores: dict[str, int] = {}
+    id_scores: dict[str, int] = {}
+    title_scores: dict[str, int] = {}
     for document in manifest["documents"]:
         id_tokens = _source_tokens(document["document_id"])
         title_tokens = _source_tokens(document.get("title", "")) - id_tokens
-        score = 2 * sum(1 for t in id_tokens if f" {t}" in question_norm)
-        score += sum(1 for t in title_tokens if f" {t}" in question_norm)
-        scores[document["document_id"]] = score
-    best = max(scores.values(), default=0)
-    return {doc for doc, s in scores.items() if s and s == best}
+        id_scores[document["document_id"]] = sum(1 for t in id_tokens if f" {t}" in question_norm)
+        title_scores[document["document_id"]] = sum(1 for t in title_tokens if f" {t}" in question_norm)
+    # contano i token del document_id (i titoli portano rumore: "…e dei carri").
+    # Con ≥2 token il documento è nominato quasi certamente: si tengono tutti
+    # quelli sopra soglia ("l'agenda e il registro" nomina due fonti); con match
+    # deboli (1 token) si tiene solo il massimo, per non far entrare il
+    # "giornale borbonico" quando la domanda parla del "funzionario borbonico"
+    strong = {doc for doc, s in id_scores.items() if s >= 2}
+    best_id = max(id_scores.values(), default=0)
+    if strong:
+        matched = strong
+    elif best_id > 0:
+        matched = {doc for doc, s in id_scores.items() if s == best_id}
+    else:
+        best_title = max(title_scores.values(), default=0)
+        matched = {doc for doc, s in title_scores.items() if s and s == best_title}
+
+    # match per CATEGORIA: "i testi propagandistici", "la fonte contestata"...
+    # la domanda può indicare una classe di reliability, non un singolo documento
+    category_map = {
+        "propagand": "propaganda",
+        "contestat": "contested",
+        "aggiornat": "corrective",
+        "rettific": "corrective",
+        "superat": "obsolete",
+    }
+    for keyword, reliability in category_map.items():
+        if f" {keyword}" in question_norm:
+            for document in manifest["documents"]:
+                if document.get("reliability") != reliability:
+                    continue
+                # "testi" esclude immagini/mappe della stessa categoria
+                if " test" in question_norm and document.get("modality") in ("image", "map"):
+                    continue
+                matched.add(document["document_id"])
+    return matched
+
+
+def fetch_doc_chunks(
+    embedder, vector_store, collection: str, domanda: str, document_id: str, k: int = 2
+) -> list[dict]:
+    """I chunk più pertinenti di UN documento specifico (filtro sul document_id).
+
+    Serve quando la domanda nomina una fonte che il retrieval globale non ha
+    pescato nei top-k: senza il documento in contesto il modello non può risponderle.
+    """
+    from qdrant_client import models as qmodels
+
+    query_vector = embedder.embed(domanda)
+    if hasattr(query_vector, "vector"):
+        query_vector = query_vector.vector
+    elif isinstance(query_vector, list) and query_vector and hasattr(query_vector[0], "vector"):
+        query_vector = query_vector[0].vector
+    client = vector_store.get_client()
+    result = client.query_points(
+        collection_name=collection,
+        query=query_vector,
+        using=EMB_NAME,
+        limit=k,
+        with_payload=True,
+        query_filter=qmodels.Filter(
+            must=[qmodels.FieldCondition(key="document_id", match=qmodels.MatchValue(value=document_id))]
+        ),
+    )
+    hits = []
+    for point in result.points:
+        payload = point.payload or {}
+        text = (payload.get("text") or "").strip()
+        if text:
+            hits.append({"document_id": document_id, "text": text, "score": float(point.score)})
+    return hits
 
 
 def scored_retrieve(embedder, vector_store, collection: str, domanda: str, k: int = 12) -> list[dict]:
@@ -401,7 +471,18 @@ def select_contexts(question: str, hits: list[dict], manifest: dict, max_context
     retrieved_matched = [h for h in unique_hits if h["document_id"] in matched_docs]
     if retrieved_matched:
         best_matched = max(h["score"] for h in retrieved_matched)
-        selected = sorted(retrieved_matched, key=lambda h: -h["score"])[:max_contexts]
+        # prima il miglior chunk di OGNI documento nominato, poi i secondi chunk
+        by_score = sorted(retrieved_matched, key=lambda h: -h["score"])
+        first_per_doc: list[dict] = []
+        seen_docs: set[str] = set()
+        rest: list[dict] = []
+        for hit in by_score:
+            if hit["document_id"] not in seen_docs:
+                seen_docs.add(hit["document_id"])
+                first_per_doc.append(hit)
+            else:
+                rest.append(hit)
+        selected = (first_per_doc + rest)[:max_contexts]
         extras = [
             h for h in unique_hits
             if h["document_id"] not in matched_docs
@@ -516,7 +597,11 @@ def answer_one(
     started = time.perf_counter()
     hits = scored_retrieve(embedder, vector_store, collection, question_text, k=12)
     expansion_response = None
-    if not matched_docs_for(question_text, manifest):
+    matched = matched_docs_for(question_text, manifest)
+    # documenti nominati dalla domanda ma assenti dal top-12: recupero forzato
+    for document_id in matched - {h["document_id"] for h in hits}:
+        hits.extend(fetch_doc_chunks(embedder, vector_store, collection, question_text, document_id, k=2))
+    if not matched:
         # domanda generica/cross-doc: multi-query per non mancare fonti (recall)
         queries, expansion_response = expand_queries(llm, question_text)
         merged: dict[tuple[str, str], dict] = {
