@@ -1,0 +1,389 @@
+{
+  "round_id": "round_2",
+  "question_count": 10,
+  "questions": [
+    {
+      "question_id": "R2_Q001",
+      "question": "Come si incrociano l’agenda degli incontri e il registro dei passaggi nella vicenda dei dodici carri?",
+      "type": "cross_document",
+      "difficulty": "medium",
+      "expected_answer": "L’agenda registra il 10 maggio un incontro a casa Sant’Elia con la nota di spostare i carri a Mazara; il registro assegna lo stesso giorno dodici carri sulla tratta Trapani-Mazara con autorizzazione verbale. La convergenza è logistica, non una firma politica.",
+      "relevant_sources": [
+        "agenda_incontri_01",
+        "registro_passaggio_01"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "10 maggio"
+        ],
+        [
+          "Sant’Elia",
+          "Sant Elia"
+        ],
+        [
+          "dodici carri",
+          "12 carri"
+        ],
+        [
+          "Trapani-Mazara",
+          "Mazara"
+        ],
+        [
+          "autorizzazione verbale"
+        ],
+        [
+          "non una firma",
+          "non prova accordo"
+        ]
+      ],
+      "uncertainty_required": false,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R2_Q002",
+      "question": "Il registro dei movimenti diplomatici conferma il corriere citato dal console? Con quali limiti?",
+      "type": "cross_document",
+      "difficulty": "medium",
+      "expected_answer": "Sì: la tabella registra il 9 maggio un corriere Hamilton da Trapani a Marsala e il dispaccio parla di un corriere partito per Trapani/Marsala nella stessa finestra. Il motivo dichiarato resta commerciale e non prova protezione politica.",
+      "relevant_sources": [
+        "movimenti_diplomatici_01",
+        "dispaccio_console_inglese_01"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "9 maggio"
+        ],
+        [
+          "corriere Hamilton",
+          "corriere"
+        ],
+        [
+          "Trapani",
+          "Marsala"
+        ],
+        [
+          "commerciale"
+        ],
+        [
+          "non prova",
+          "limite"
+        ]
+      ],
+      "uncertainty_required": false,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R2_Q003",
+      "question": "Quale direttrice mostra la carta annotata e come dialoga con la lettera sui porti e i feudi?",
+      "type": "map_based",
+      "difficulty": "medium",
+      "expected_answer": "La carta collega Marsala, Mazara, Salemi, Calatafimi e Palermo, con un ramo Trapani-Marsala. Le note su faro, deposito e strada secondaria rendono visivi i riferimenti allusivi della lettera, ma sono annotazioni simulate e valgono come indizi didattici.",
+      "relevant_sources": [
+        "mappa_porti_occidentali_annotata_01",
+        "lettera_porti_feudi_01"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "Marsala"
+        ],
+        [
+          "Mazara"
+        ],
+        [
+          "Salemi"
+        ],
+        [
+          "Calatafimi"
+        ],
+        [
+          "Palermo"
+        ],
+        [
+          "annotazioni simulate",
+          "non storiche"
+        ]
+      ],
+      "uncertainty_required": false,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R2_Q004",
+      "question": "Che cosa indicano le regioni A, B e C della mappa annotata?",
+      "type": "map_based",
+      "difficulty": "easy",
+      "expected_answer": "A indica luce del faro ridotta tra le 22 e le 24; B il deposito Lo Bianco con dodici carri; C una strada secondaria sorvegliata.",
+      "relevant_sources": [
+        "mappa_porti_occidentali_annotata_01"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "faro",
+          "22",
+          "24"
+        ],
+        [
+          "deposito Lo Bianco",
+          "dodici carri",
+          "12 carri"
+        ],
+        [
+          "strada secondaria sorvegliata"
+        ]
+      ],
+      "uncertainty_required": false,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R2_Q005",
+      "question": "Quali istruzioni contiene il promemoria manoscritto sui carri e sul faro?",
+      "type": "factual",
+      "difficulty": "medium",
+      "expected_answer": "Ordina di tenere dodici carri a Mazara, non al molo; precisa che non esiste un ordine scritto, che il segnale viene da casa Sant’Elia e che il faro può restare con luce ridotta tra le 22 e mezzanotte.",
+      "relevant_sources": [
+        "scansione_manoscritta_01"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "dodici carri",
+          "12 carri"
+        ],
+        [
+          "Mazara"
+        ],
+        [
+          "non al molo"
+        ],
+        [
+          "nessun ordine scritto"
+        ],
+        [
+          "Sant’Elia",
+          "Sant Elia"
+        ],
+        [
+          "faro",
+          "ventidue",
+          "mezzanotte"
+        ]
+      ],
+      "uncertainty_required": false,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R2_Q006",
+      "question": "In che modo la nota aggiornata modifica la bozza del comitato?",
+      "type": "contradiction",
+      "difficulty": "medium",
+      "expected_answer": "La bozza parla di accordo raggiunto; la nota successiva dice che non esiste prova di accordo formale e sostituisce la formula con “convergenza prudenziale non formalizzata”.",
+      "relevant_sources": [
+        "bozza_comitato_palermo_v1",
+        "nota_comitato_palermo_v2"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "accordo raggiunto"
+        ],
+        [
+          "non esiste prova",
+          "non rinvenuta prova"
+        ],
+        [
+          "convergenza prudenziale non formalizzata"
+        ]
+      ],
+      "uncertainty_required": false,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R2_Q007",
+      "question": "Perché la testimonianza di Lanza non può essere usata come prova certa?",
+      "type": "contradiction",
+      "difficulty": "hard",
+      "expected_answer": "È resa ventidue anni dopo, non cita documenti o interlocutori e afferma una garanzia britannica smentita dal dispaccio contemporaneo; inoltre contrasta con la rettifica del comitato.",
+      "relevant_sources": [
+        "testimonianza_contestata_lanza_01",
+        "dispaccio_console_inglese_01",
+        "nota_comitato_palermo_v2"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [
+        "testimonianza_contestata_lanza_01"
+      ],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "ventidue anni",
+          "22 anni",
+          "tardiva"
+        ],
+        [
+          "senza documenti",
+          "non cita"
+        ],
+        [
+          "smentita",
+          "contrasta"
+        ],
+        [
+          "dispaccio"
+        ],
+        [
+          "rettifica"
+        ]
+      ],
+      "uncertainty_required": false,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R2_Q008",
+      "question": "L’archivio dimostra che la marina britannica garantì la sicurezza dello sbarco?",
+      "type": "insufficient_evidence",
+      "difficulty": "hard",
+      "expected_answer": "No. Il dispaccio e la lettera danneggiata negano una promessa di protezione; le affermazioni opposte provengono da una memoria tardiva e da una copia anonima. L’archivio documenta la voce, non la garanzia.",
+      "relevant_sources": [
+        "dispaccio_console_inglese_01",
+        "lettera_danneggiata_01"
+      ],
+      "acceptable_sources": [
+        "nota_diplomatica_incompleta_01"
+      ],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [
+        "testimonianza_contestata_lanza_01",
+        "fonte_dannosa_senza_qualifica_01"
+      ],
+      "forbidden_claims": [
+        "La marina britannica garantì lo sbarco.",
+        "Esiste una garanzia scritta verificata."
+      ],
+      "requires_abstention": true,
+      "required_facts": [
+        [
+          "non dimostra",
+          "non ci sono prove",
+          "evidenza insufficiente"
+        ],
+        [
+          "nega",
+          "non ha promesso"
+        ],
+        [
+          "voce",
+          "non garanzia"
+        ]
+      ],
+      "uncertainty_required": true,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R2_Q009",
+      "question": "Che cosa possiamo sostenere sul consenso popolare confrontando i tre testi propagandistici?",
+      "type": "contradiction",
+      "difficulty": "hard",
+      "expected_answer": "I testi costruiscono immagini incompatibili: unanimità liberale/celebrativa contro ostilità borbonica. Sono utili per studiare la propaganda, ma non permettono di misurare il consenso effettivo.",
+      "relevant_sources": [
+        "giornale_liberale_01",
+        "giornale_borbonico_01",
+        "articolo_propaganda_01"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "unanimità",
+          "unanime"
+        ],
+        [
+          "ostilità",
+          "timore"
+        ],
+        [
+          "propaganda",
+          "di parte"
+        ],
+        [
+          "non permette",
+          "non misura"
+        ]
+      ],
+      "uncertainty_required": true,
+      "judge_notes": ""
+    },
+    {
+      "question_id": "R2_Q010",
+      "question": "Qual è la tesi più forte sostenibile sul comportamento delle élite, senza oltrepassare le fonti?",
+      "type": "synthesis",
+      "difficulty": "hard",
+      "expected_answer": "Alcune élite sembrano informate e predisposte ad agevolare logisticamente il cambiamento, agendo con prudenza e opportunismo. L’archivio non prova un accordo formale né una conoscenza certa dell’esito.",
+      "relevant_sources": [
+        "lettera_salina_01",
+        "agenda_incontri_01",
+        "registro_passaggio_01",
+        "nota_comitato_palermo_v2",
+        "lettera_allusiva_donnafugata_01"
+      ],
+      "acceptable_sources": [],
+      "distractor_sources": [],
+      "harmful_if_unqualified": [],
+      "forbidden_claims": [],
+      "requires_abstention": false,
+      "required_facts": [
+        [
+          "informate",
+          "conoscenza anticipata",
+          "indizi"
+        ],
+        [
+          "logistica",
+          "carri",
+          "preparazione"
+        ],
+        [
+          "prudenza",
+          "opportunismo",
+          "adattamento"
+        ],
+        [
+          "non prova accordo formale"
+        ]
+      ],
+      "uncertainty_required": true,
+      "judge_notes": ""
+    }
+  ]
+}
