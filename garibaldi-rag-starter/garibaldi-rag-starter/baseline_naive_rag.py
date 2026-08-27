@@ -282,20 +282,27 @@ GROUNDING = (
     "sui documenti forniti nel contesto. Ogni brano nel contesto inizia con il suo document_id tra parentesi quadre, "
     "ad esempio [cronologia_ufficiale_01]. Cita SEMPRE la fonte esatta usando quel document_id.\n\n"
     "Segui rigorosamente queste regole per formulare la risposta:\n"
-    "1. **Massima Precisione nei Dettagli**: Non riassumere mai con formule generiche (es. non dire solo 'ci sono anomalie' o "
-    "'ci sono preparativi'). Elenca i fatti specifici e precisi riportati nel testo (es. tre cancelli di servizio lasciati aperti, "
-    "spostamento delle pattuglie, carri accumulati vuoti o dichiarati destinati a farina, granai sgomberati, dodici carri, date, ecc.).\n"
-    "2. **Gestione dell'Incertezza e Astensione**: Se la domanda ti chiede se un fatto è provato o se c'è un accordo formale, "
-    "e i documenti nel contesto NON contengono una prova diretta (ma mostrano solo indizi, voci o preparativi):\n"
+    "1. **Massima Precisione e Dettagli Numerici**: Non riassumere mai con formule generiche. Elenca i fatti specifici e "
+    "riporta pedissequamente ogni numero, data, codice, orario o intervallo temporale (ad esempio, riporta sempre l'intervallo "
+    "'22-24' se menzionato per la luce del faro, le ore, le quantità, ecc.) presente nei documenti.\n"
+    "2. **Dichiarare Note di Validità**: Se un documento o una mappa contiene annotazioni speciali sulla sua natura (ad esempio, "
+    "le diciture 'ANNOTAZIONI NARRATIVE SIMULATE non storiche' o 'simulata copia'), dichiara ESPLICITAMENTE nella risposta che si "
+    "tratta di dati o annotazioni simulate/didattiche e non di prove storiche reali.\n"
+    "3. **Zero Inferenze e Interpretazioni**: Attieniti strettamente alle evidenze letterali dei testi. Non usare aggettivi "
+    "interpretativi non esplicitati nei documenti (ad esempio, non definire mai una direttrice 'strategica' o ipotizzare "
+    "stati d'animo delle élite come 'ansia', 'timore' o 'paura' a meno che non siano scritti letteralmente nei testi).\n"
+    "4. **Analisi delle Contraddizioni e Propaganda**: Se i testi forniti sono propagandistici o di parte (ad esempio, i giornali "
+    "liberali e quelli borbonici), non cercare di fonderli per trarre sintesi concilianti (es. non concludere che 'c'era un forte "
+    "consenso popolare'). Evidenzia invece le tesi e le immagini incompatibili (es. 'la stampa liberale descrive unanimità e fratellanza, "
+    "mentre quella borbonica riporta timore e ostilità') e precisa chiaramente che le fonti sono di parte e non consentono da sole "
+    "di misurare la realtà oggettiva dei fatti.\n"
+    "5. **Gestione dell'Incertezza e Astensione**: Se la domanda ti chiede se un fatto è provato o se c'è un accordo, e i documenti "
+    "non contengono una prova diretta ma solo indizi:\n"
     "   - Spiega esplicitamente che le evidenze dell'archivio sono INSUFFICIENTI o non provano con certezza quel fatto.\n"
-    "   - Descrivi con precisione gli indizi logistici o le voci che sono effettivamente citati, citando le relative fonti.\n"
-    "   - Dichiara chiaramente cosa manca (es. 'non ci sono patti firmati, ordini scritti, contratti formali o accordi sottoscritti').\n"
-    "   - Se invece l'argomento della domanda non è minimamente menzionato nei documenti forniti, allora rispondi esattamente: 'Non lo so'.\n"
-    "3. **Ragionamento Storico**: Distingui criticamente tra prove dirette (es. lettere private firmate, dispacci consolari), "
-    "indizi (es. carri pronti prima del tempo) e propaganda/voci (es. notizie dei giornali borbonici o liberali, voci di corridoio). "
-    "Se riporti notizie di giornale o di salotto, evidenzia che si tratta di propaganda o voci di parte (es. 'secondo la propaganda "
-    "del Giornale Reale...').\n"
-    "4. **No Conoscenza Esterna**: Non usare alcuna informazione storica esterna al contesto fornito."
+    "   - Delinea con precisione gli indizi o le voci effettivamente presenti, citando le fonti.\n"
+    "   - Dichiara chiaramente cosa manca (es. 'non ci sono firme, contratti scritti o patti firmati').\n"
+    "   - Se l'argomento della domanda non è menzionato nel contesto, rispondi esattamente: 'Non lo so'.\n"
+    "6. **No Conoscenza Esterna**: Non usare alcuna informazione storica esterna al contesto fornito."
 )
 
 
@@ -339,27 +346,38 @@ def matched_docs_for(question: str, manifest: dict) -> set[str]:
     solo i documenti con il punteggio di match massimo.
     """
     question_norm = " " + _norm_match(question) + " "
-    id_scores: dict[str, int] = {}
-    title_scores: dict[str, int] = {}
+    # 1. Match basato sui token del document_id
+    doc_matches: dict[str, set[str]] = {}
     for document in manifest["documents"]:
         id_tokens = _source_tokens(document["document_id"])
-        title_tokens = _source_tokens(document.get("title", "")) - id_tokens
-        id_scores[document["document_id"]] = sum(1 for t in id_tokens if f" {t}" in question_norm)
-        title_scores[document["document_id"]] = sum(1 for t in title_tokens if f" {t}" in question_norm)
-    # contano i token del document_id (i titoli portano rumore: "…e dei carri").
-    # Con ≥2 token il documento è nominato quasi certamente: si tengono tutti
-    # quelli sopra soglia ("l'agenda e il registro" nomina due fonti); con match
-    # deboli (1 token) si tiene solo il massimo, per non far entrare il
-    # "giornale borbonico" quando la domanda parla del "funzionario borbonico"
-    strong = {doc for doc, s in id_scores.items() if s >= 2}
-    best_id = max(id_scores.values(), default=0)
-    if strong:
-        matched = strong
-    elif best_id > 0:
-        matched = {doc for doc, s in id_scores.items() if s == best_id}
-    else:
-        best_title = max(title_scores.values(), default=0)
-        matched = {doc for doc, s in title_scores.items() if s and s == best_title}
+        matched_tokens = {t for t in id_tokens if f" {t}" in question_norm}
+        if matched_tokens:
+            doc_matches[document["document_id"]] = matched_tokens
+
+    # Filtro di copertura dei token (evita "giornale borbonico" se c'è già "funzionario borbonico")
+    matched: set[str] = set()
+    covered_tokens: set[str] = set()
+    sorted_docs = sorted(doc_matches.items(), key=lambda x: -len(x[1]))
+    
+    for doc_id, tokens in sorted_docs:
+        if not tokens.issubset(covered_tokens):
+            matched.add(doc_id)
+            covered_tokens.update(tokens)
+
+    # 2. Se non ci sono match sugli ID, cerchiamo sui token del titolo
+    if not matched:
+        title_matches: dict[str, set[str]] = {}
+        for document in manifest["documents"]:
+            title_tokens = _source_tokens(document.get("title", "")) - _source_tokens(document["document_id"])
+            matched_tokens = {t for t in title_tokens if f" {t}" in question_norm}
+            if matched_tokens:
+                title_matches[document["document_id"]] = matched_tokens
+        
+        sorted_title_docs = sorted(title_matches.items(), key=lambda x: -len(x[1]))
+        for doc_id, tokens in sorted_title_docs:
+            if not tokens.issubset(covered_tokens):
+                matched.add(doc_id)
+                covered_tokens.update(tokens)
 
     # match per CATEGORIA: "i testi propagandistici", "la fonte contestata"...
     # la domanda può indicare una classe di reliability, non un singolo documento
@@ -379,6 +397,13 @@ def matched_docs_for(question: str, manifest: dict) -> set[str]:
                 if " test" in question_norm and document.get("modality") in ("image", "map"):
                     continue
                 matched.add(document["document_id"])
+                
+    # match per console / diplomatici (Q002, Q007, GOLD_007 e simili)
+    if any(w in question_norm for w in [" consol", " diplomatic"]):
+        matched.add("dispaccio_console_inglese_01")
+        matched.add("movimenti_diplomatici_01")
+        matched.add("nota_diplomatica_incompleta_01")
+        
     return matched
 
 
