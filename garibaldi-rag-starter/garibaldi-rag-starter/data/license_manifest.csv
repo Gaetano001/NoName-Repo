@@ -1,15 +1,8 @@
 document_id,origin_type,title,license,rights_status,original_url,accessed_at
-cronologia_ufficiale_01,simulated,Cronologia ufficiale degli eventi,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
-dossier_introduttivo_01,simulated,Dossier introduttivo: l’archivio delle mezze verità,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
-elenco_personaggi_01,simulated,Elenco dei personaggi dell’archivio,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
-garib_d05,authentic,"Documento originale scansionato, 3 pagine","Educational use only within GenAI Academy hackathon; source record has no explicit redistribution license; organizer decision 2026-08-12: retain for didactic use only, not open redistribution",cleared_for_educational_use_only,https://www.150anni.it/webi/_file/documenti/risorgimento/personaggi/garibaldi/garib_d05.pdf,2026-08-05
-mappa_geografica_semplice_01,derived,Mappa geografica semplice dei luoghi chiave,Public Domain base; labels CC0-1.0,cleared_for_distribution,https://commons.wikimedia.org/wiki/File:Sicily_location_map.svg,2026-08-05
-scheda_luoghi_chiave_01,simulated,Scheda dei luoghi chiave,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
-dispaccio_console_inglese_01,simulated,Dispaccio del console britannico sul traffico di Marsala,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
-garib_d07,authentic,"Documento originale scansionato, 2 pagine","Educational use only within GenAI Academy hackathon; source record has no explicit redistribution license; organizer decision 2026-08-12: retain for didactic use only, not open redistribution",cleared_for_educational_use_only,https://www.150anni.it/webi/_file/documenti/risorgimento/personaggi/garibaldi/garib_d07.pdf,2026-08-05
-garib_d09,authentic,"Documento originale scansionato, 2 pagine","Educational use only within GenAI Academy hackathon; source record has no explicit redistribution license; organizer decision 2026-08-12: retain for didactic use only, not open redistribution",cleared_for_educational_use_only,https://www.150anni.it/webi/_file/documenti/risorgimento/personaggi/garibaldi/garib_d09.pdf,2026-08-05
-giornale_borbonico_01,simulated,Il Giornale Reale,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
-giornale_liberale_01,simulated,La Voce dell’Isola,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
-lettera_salina_01,simulated,Lettera del principe Salina al cugino di Trapani,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
-lettera_tancredi_01,simulated,Biglietto di Tancredi alla baronessa Sant’Elia,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
-nota_funzionario_borbonico_01,simulated,Nota del funzionario borbonico Ruggiero Malaspina,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
+articolo_propaganda_01,simulated,L’isola unanime - articolo celebrativo,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
+bozza_comitato_palermo_v1,simulated,Bozza del comitato di Palermo - versione 1,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
+fonte_dannosa_senza_qualifica_01,simulated,Copia anonima della voce sulla garanzia britannica,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
+lettera_allusiva_donnafugata_01,simulated,Lettera allusiva da Donnafugata,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
+nota_comitato_palermo_v2,simulated,Nota del comitato di Palermo - versione aggiornata,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
+nota_diplomatica_incompleta_01,simulated,Nota diplomatica incompleta,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
+testimonianza_contestata_lanza_01,simulated,Testimonianza retrospettiva del capitano Lanza,CC0-1.0 for simulated content; see project LICENSES.md,cleared_for_distribution,,
